@@ -19,13 +19,13 @@
       <div class="flex justify-center items-center">
         <!-- Text Content -->
         <div class="text-white space-y-6 animate-slide-up text-center max-w-4xl mx-auto">
-          <h1 class="text-5xl md:text-6xl font-bold leading-tight">
+          <h1 class="text-5xl md:text-6xl font-bold leading-normal pb-8">
             Olá, eu sou
-            <span class="block text-gradient from-blue-200 to-cyan-200 mt-2">Thiago Barcelos</span>
+            <span class="inline-block text-gradient from-blue-200 to-cyan-200 mt-2 py-6 px-1 leading-[1.4]">Thiago Barcelos</span>
           </h1>
           
           <!-- Typing Animation -->
-          <div class="h-16 flex justify-center items-center">
+          <div class="h-16 flex justify-center items-center mt-12">
             <p class="text-xl md:text-2xl text-blue-100 font-semibold">
               {{ currentRole }}
               <span class="animate-pulse">|</span>

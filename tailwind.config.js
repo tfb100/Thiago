@@ -18,8 +18,8 @@ export default {
           accent: '#0ea5e9',
         },
         hero: {
-          from: '#1e3a8a', // Azul escuro profundo
-          to: '#3b82f6',   // Azul médio
+          from: '#020617', // Slate 950
+          to: '#0f172a',   // Slate 900
         },
         experience: {
           from: '#064e3b', // Emerald 950
@@ -42,8 +42,8 @@ export default {
           to: '#ea580c',   // Orange 600
         },
         contact: {
-          from: '#020617', // Slate 950
-          to: '#0f172a',   // Slate 900
+          from: '#475569', // Slate 600
+          to: '#475569',   // Slate 600
         },
       },
       animation: {
