@@ -1,0 +1,53 @@
+/* Executive layout — limpo e profissional */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.exec-layout {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Fundo sutil: gradiente muito suave */
+.exec-hero-bg {
+  background-color: #0a0a0b;
+  background-image: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(14, 165, 233, 0.08) 0%, transparent 55%);
+}
+
+/* Reveal ao scroll */
+.exec-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.exec-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger para filhos */
+.exec-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.exec-stagger.revealed > *:nth-child(1) { transition-delay: 0ms; }
+.exec-stagger.revealed > *:nth-child(2) { transition-delay: 60ms; }
+.exec-stagger.revealed > *:nth-child(3) { transition-delay: 120ms; }
+.exec-stagger.revealed > *:nth-child(4) { transition-delay: 180ms; }
+.exec-stagger.revealed > *:nth-child(5) { transition-delay: 240ms; }
+.exec-stagger.revealed > *:nth-child(6) { transition-delay: 300ms; }
+
+.exec-stagger.revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cards: hover discreto */
+.exec-card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.exec-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px -16px rgba(0, 0, 0, 0.4);
+}

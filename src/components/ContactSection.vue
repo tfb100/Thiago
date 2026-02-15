@@ -1,5 +1,13 @@
 <template>
   <section id="contato" class="py-20 bg-gradient-to-br from-contact-from to-contact-to relative overflow-hidden">
+    <!-- Particle Background -->
+    <ParticleBackground 
+      :particle-count="20"
+      shape="circle"
+      particle-color="#94a3b8"
+      line-color="rgba(148, 163, 184, 0.1)"
+      :speed="0.5"
+    />
     <!-- Background pattern -->
     <div class="absolute inset-0 opacity-5">
       <div class="absolute inset-0" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 50px 50px;"></div>
@@ -19,95 +27,96 @@
         </p>
       </div>
 
-      <!-- Contact Options -->
-      <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
-        <a
-          v-for="(contact, index) in contactMethods"
-          :key="index"
-          ref="cardRefs"
-          :href="contact.link"
-          target="_blank"
-          rel="noopener noreferrer"
-          :class="['glass-effect-strong rounded-xl p-6 text-center transition-all duration-700 group cursor-pointer',
-                   cardsVisible[index] ? 'reveal-scale revealed' : 'reveal-scale']"
-          :style="{ 
-            transitionDelay: `${index * 100}ms`,
-            ...getCardStyle(index)
-          }"
-          @mouseenter="handleCardHover(index)"
-          @mousemove="handleCardMove(index, $event)"
-          @mouseleave="handleCardLeave(index)"
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <!-- Image -->
+        <div 
+          ref="imageRef"
+          :class="['flex justify-center transition-all duration-700', imageVisible ? 'reveal-scale revealed' : 'reveal-scale']"
         >
-          <div class="text-5xl mb-4 transform group-hover:scale-125 group-hover:rotate-12 transition-all duration-300 inline-block">
-            {{ contact.icon }}
+          <div class="relative group w-full max-w-lg">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-400 to-slate-200 rounded-2xl blur-2xl opacity-50 animate-pulse group-hover:opacity-75 transition-opacity duration-300"></div>
+            <img
+              src="/images/contato.png"
+              alt="Contato"
+              loading="lazy"
+              decoding="async"
+              width="512"
+              height="384"
+              class="relative rounded-2xl shadow-2xl w-full transform group-hover:scale-105 group-hover:-rotate-1 transition-all duration-500 glow-effect-cyan"
+            />
           </div>
-          <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
-            {{ contact.title }}
-          </h3>
-          <p class="text-slate-300 group-hover:text-white transition-colors">
-            {{ contact.description }}
-          </p>
-          
-          <!-- Hover indicator -->
-          <div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span class="text-cyan-400 text-sm font-semibold flex items-center justify-center gap-2">
-              Clique para acessar
-              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-              </svg>
-            </span>
-          </div>
-        </a>
-      </div>
+        </div>
 
-      <!-- Footer -->
-      <div 
-        ref="footerRef"
-        :class="['text-center pt-12 border-t border-slate-600 transition-all duration-700',
-                 footerVisible ? 'reveal-fade-up revealed' : 'reveal-fade-up']"
-      >
-        <p class="text-slate-400 mb-4 flex items-center justify-center gap-2">
-          <span>© {{ currentYear }} Thiago Freitas Barcelos.</span>
-          <span class="hidden sm:inline">Todos os direitos reservados.</span>
-        </p>
-        <p class="text-slate-500 text-sm flex items-center justify-center gap-2 flex-wrap">
-          <span>Desenvolvido com</span>
-          <span class="inline-flex items-center gap-1">
-            <svg class="w-4 h-4 text-green-400 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
-            </svg>
-            usando
-          </span>
-          <span class="px-2 py-1 bg-slate-700 rounded text-emerald-400 text-xs font-mono">Vue.js</span>
-          <span class="text-slate-600">&</span>
-          <span class="px-2 py-1 bg-slate-700 rounded text-cyan-400 text-xs font-mono">Tailwind CSS</span>
-        </p>
+        <!-- Contact Options -->
+        <div class="grid grid-cols-1 gap-6">
+          <a
+            v-for="(contact, index) in contactMethods"
+            :key="index"
+            ref="cardRefs"
+            :href="contact.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            :class="['glass-effect-strong rounded-xl p-6 transition-all duration-700 group cursor-pointer',
+                     cardsVisible[index] ? 'reveal-scale revealed' : 'reveal-scale']"
+            :style="{ 
+              transitionDelay: `${index * 100}ms`,
+              ...getCardStyle(index)
+            }"
+            @mouseenter="handleCardHover(index)"
+            @mousemove="handleCardMove(index, $event)"
+            @mouseleave="handleCardLeave(index)"
+          >
+            <div class="flex items-center space-x-6">
+              <div class="flex-shrink-0 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                <div class="w-16 h-16 bg-gradient-to-br from-slate-500 to-slate-700 rounded-xl flex items-center justify-center shadow-lg">
+                  <component :is="contact.icon" class="w-8 h-8 text-white" stroke-width="1.5" />
+                </div>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">
+                  {{ contact.title }}
+                </h3>
+                <p class="text-slate-300 group-hover:text-white transition-colors text-sm">
+                  {{ contact.description }}
+                </p>
+                <div class="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span class="text-cyan-400 text-xs font-semibold flex items-center gap-1">
+                    Acessar perfil
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useScrollReveal } from '../composables/useScrollReveal'
-
-const currentYear = computed(() => new Date().getFullYear())
+import ParticleBackground from './ParticleBackground.vue'
+import { Mail, Briefcase, Github } from 'lucide-vue-next'
 
 const contactMethods = [
   {
-    icon: '📧',
+    icon: Mail,
     title: 'Email',
     description: 'Entre em contato por email',
     link: 'mailto:contato@thiagobarcelos.com'
   },
   {
-    icon: '💼',
+    icon: Briefcase,
     title: 'LinkedIn',
     description: 'Conecte-se profissionalmente',
     link: 'https://linkedin.com'
   },
   {
-    icon: '💻',
+    icon: Github,
     title: 'GitHub',
     description: 'Veja meus projetos',
     link: 'https://github.com'
@@ -115,6 +124,7 @@ const contactMethods = [
 ]
 
 const { elementRef: headerRef, isVisible: headerVisible } = useScrollReveal(0.2)
+const { elementRef: imageRef, isVisible: imageVisible } = useScrollReveal(0.2)
 const { elementRef: footerRef, isVisible: footerVisible } = useScrollReveal(0.2)
 
 const cardRefs = ref([])

@@ -1,25 +1,31 @@
 <script setup>
 import NavigationBar from './components/NavigationBar.vue'
 import HeroSection from './components/HeroSection.vue'
+import ConcursosSection from './components/ConcursosSection.vue'
 import ExperienceSection from './components/ExperienceSection.vue'
 import AISection from './components/AISection.vue'
 import OpenSourceSection from './components/OpenSourceSection.vue'
+import DevSection from './components/DevSection.vue'
 import ContactSection from './components/ContactSection.vue'
+import FooterSection from './components/FooterSection.vue'
 import ScrollToTop from './components/ScrollToTop.vue'
-import CustomCursor from './components/CustomCursor.vue'
+
 </script>
 
 <template>
   <div class="min-h-screen">
-    <CustomCursor />
+
     <NavigationBar />
     <main>
       <HeroSection />
+      <ConcursosSection />
       <ExperienceSection />
       <AISection />
+      <DevSection />
       <OpenSourceSection />
       <ContactSection />
     </main>
+    <FooterSection />
     <ScrollToTop />
   </div>
 </template>

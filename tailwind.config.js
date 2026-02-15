@@ -6,26 +6,44 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        exec: ['Inter', 'system-ui', 'sans-serif'],
+      },
       colors: {
+        exec: {
+          bg: '#0a0a0b',
+          card: '#141416',
+          border: '#27272a',
+          muted: '#a1a1aa',
+          accent: '#0ea5e9',
+        },
         hero: {
           from: '#1e3a8a', // Azul escuro profundo
           to: '#3b82f6',   // Azul médio
         },
         experience: {
-          from: '#0c4a6e', // Azul petróleo escuro
-          to: '#0ea5e9',   // Azul céu
+          from: '#064e3b', // Emerald 950
+          to: '#134e4a',   // Teal 900
+        },
+        concursos: {
+          from: '#0f172a', // Slate 900 (Deep Navy)
+          to: '#1e40af',   // Blue 800 (Royal Blue)
         },
         ai: {
-          from: '#1e40af', // Azul royal escuro
-          to: '#60a5fa',   // Azul claro
+          from: '#312e81', // Indigo 900
+          to: '#7c3aed',   // Violet 600
+        },
+        dev: {
+          from: '#134e4a', // Teal 900
+          to: '#0d9488',   // Teal 600
         },
         opensource: {
-          from: '#075985', // Azul aço escuro
-          to: '#38bdf8',   // Azul cyan claro
+          from: '#7c2d12', // Orange 900
+          to: '#ea580c',   // Orange 600
         },
         contact: {
-          from: '#1e293b', // Azul ardósia escuro
-          to: '#475569',   // Azul ardósia médio
+          from: '#020617', // Slate 950
+          to: '#0f172a',   // Slate 900
         },
       },
       animation: {

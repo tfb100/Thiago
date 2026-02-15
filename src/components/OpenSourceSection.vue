@@ -1,5 +1,13 @@
 <template>
   <section id="opensource" class="min-h-screen py-20 bg-gradient-to-br from-opensource-from to-opensource-to animate-gradient relative overflow-hidden">
+    <!-- Particle Background -->
+    <ParticleBackground 
+      :particle-count="30"
+      shape="triangle"
+      particle-color="#22d3ee"
+      line-color="rgba(34, 211, 238, 0.15)"
+      :speed="0.8"
+    />
     <!-- Background decoration -->
     <div class="absolute inset-0 opacity-10">
       <div class="absolute top-60 right-60 w-96 h-96 bg-cyan-300 rounded-full blur-3xl animate-float"></div>
@@ -28,10 +36,13 @@
         >
           <div class="relative group">
             <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-400 rounded-2xl blur-2xl opacity-50 animate-pulse group-hover:opacity-75 transition-opacity duration-300"></div>
-            <div class="absolute -inset-4 bg-gradient-to-r from-sky-400 to-cyan-400 rounded-2xl blur-xl opacity-30 animate-float"></div>
             <img
               src="/images/opensource-tools.png"
               alt="Ferramentas Open Source"
+              loading="lazy"
+              decoding="async"
+              width="512"
+              height="384"
               class="relative rounded-2xl shadow-2xl max-w-lg w-full transform group-hover:scale-105 group-hover:-rotate-1 transition-all duration-500 glow-effect-orange"
             />
           </div>
@@ -44,7 +55,7 @@
         >
           <div class="glass-effect-strong rounded-xl p-6">
             <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-              <span class="text-3xl">🔧</span>
+              <Wrench class="w-8 h-8 text-cyan-300" />
               Ferramentas de Expertise
             </h3>
             <p class="text-cyan-100 leading-relaxed mb-4">
@@ -87,8 +98,8 @@
           @mousemove="handleToolMove(index, $event)"
           @mouseleave="handleToolLeave(index)"
         >
-          <div class="text-6xl mb-4 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 animate-float">
-            {{ tool.icon }}
+          <div class="mb-4 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 animate-float flex justify-center">
+            <component :is="tool.icon" class="w-16 h-16 text-cyan-300" stroke-width="1.5" />
           </div>
           <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
             {{ tool.name }}
@@ -128,24 +139,26 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useScrollReveal } from '../composables/useScrollReveal'
+import ParticleBackground from './ParticleBackground.vue'
+import { Activity, Ticket, Shield, Wrench } from 'lucide-vue-next'
 
 const tools = [
   {
-    icon: '📊',
+    icon: Activity,
     name: 'Zabbix',
     description: 'Monitoramento completo de infraestrutura e aplicações em tempo real',
     features: ['Monitoramento', 'Alertas', 'Dashboards', 'Métricas'],
     skillLevel: 95
   },
   {
-    icon: '🎫',
+    icon: Ticket,
     name: 'GLPI',
     description: 'Gestão de ativos de TI e central de serviços (Service Desk)',
     features: ['ITSM', 'Inventário', 'Chamados', 'Ativos'],
     skillLevel: 90
   },
   {
-    icon: '🛡️',
+    icon: Shield,
     name: 'Wazuh',
     description: 'Plataforma de segurança para detecção de ameaças e compliance',
     features: ['SIEM', 'XDR', 'Compliance', 'Segurança'],

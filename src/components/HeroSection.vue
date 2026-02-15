@@ -2,9 +2,10 @@
   <section id="inicio" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-hero-from to-hero-to relative overflow-hidden animate-gradient">
     <!-- Particle Background -->
     <ParticleBackground 
-      :particle-count="100"
+      :particle-count="40"
       particle-color="rgba(255, 255, 255, 0.6)"
       line-color="rgba(255, 255, 255, 0.15)"
+      :speed="0.5"
     />
 
     <!-- Animated background elements -->
@@ -15,30 +16,30 @@
     </div>
 
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="flex justify-center items-center">
         <!-- Text Content -->
-        <div class="text-white space-y-6 animate-slide-up">
+        <div class="text-white space-y-6 animate-slide-up text-center max-w-4xl mx-auto">
           <h1 class="text-5xl md:text-6xl font-bold leading-tight">
             Olá, eu sou
             <span class="block text-gradient from-blue-200 to-cyan-200 mt-2">Thiago Barcelos</span>
           </h1>
           
           <!-- Typing Animation -->
-          <div class="h-16">
+          <div class="h-16 flex justify-center items-center">
             <p class="text-xl md:text-2xl text-blue-100 font-semibold">
               {{ currentRole }}
               <span class="animate-pulse">|</span>
             </p>
           </div>
 
-          <p class="text-lg text-blue-200 leading-relaxed">
+          <p class="text-lg text-blue-200 leading-relaxed max-w-2xl mx-auto">
             Profissional de tecnologia com <span class="font-bold text-white">8 nomeações</span> em órgãos públicos, 
             apaixonado por <span class="font-bold text-cyan-300">IA</span>, 
             <span class="font-bold text-cyan-300">automação</span> e 
             <span class="font-bold text-cyan-300">software livre</span>.
           </p>
           
-          <div class="flex flex-wrap gap-4 pt-4">
+          <div class="flex flex-wrap gap-4 pt-4 justify-center">
             <a
               href="#experiencia"
               @click.prevent="scrollToSection('experiencia')"
@@ -71,40 +72,27 @@
             </div>
           </div>
         </div>
-
-        <!-- Profile Image with Parallax -->
-        <div 
-          class="flex justify-center animate-fade-in"
-          :style="{ transform: `translateY(${parallaxOffset}px)` }"
-        >
-          <div class="relative group">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-2xl blur-2xl opacity-50 animate-pulse group-hover:opacity-75 transition-opacity duration-300"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-2xl blur-xl opacity-30 animate-float"></div>
-            <img
-              src="/images/hero-profile.png"
-              alt="Thiago Barcelos"
-              class="relative rounded-2xl shadow-2xl max-w-md w-full transform group-hover:scale-105 transition-all duration-500 glow-effect"
-            />
-          </div>
-        </div>
       </div>
+    </div>
 
-      <!-- Scroll Indicator -->
-      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div class="flex flex-col items-center gap-2">
-          <span class="text-white text-sm opacity-75">Role para explorar</span>
-          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
-        </div>
+    <!-- Scroll Indicator - Moved outside container to stay at bottom of section -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10 hidden sm:block">
+      <div class="flex flex-col items-center gap-2">
+        <span class="text-white text-sm opacity-75">Role para explorar</span>
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import ParticleBackground from './ParticleBackground.vue'
+import { useScrollToSection } from '../composables/useScrollToSection'
+
+const { scrollToSection } = useScrollToSection()
 
 const roles = [
   'Analista em TI',
@@ -117,7 +105,7 @@ const currentRole = ref('')
 const currentRoleIndex = ref(0)
 const currentCharIndex = ref(0)
 const isDeleting = ref(false)
-const parallaxOffset = ref(0)
+
 
 // Animated counters
 const animatedYears = ref(0)
@@ -170,25 +158,7 @@ const animateCounter = (current, target, setter, duration = 2000) => {
   }, 16)
 }
 
-// Parallax effect
-const handleScroll = () => {
-  const scrolled = window.pageYOffset
-  parallaxOffset.value = scrolled * 0.3
-}
 
-const scrollToSection = (id) => {
-  const element = document.getElementById(id)
-  if (element) {
-    const offset = 80
-    const elementPosition = element.getBoundingClientRect().top
-    const offsetPosition = elementPosition + window.pageYOffset - offset
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    })
-  }
-}
 
 onMounted(() => {
   typeRole()
@@ -200,10 +170,8 @@ onMounted(() => {
     animateCounter(0, targetTools, (val) => animatedTools.value = val, 1500)
   }, 500)
 
-  window.addEventListener('scroll', handleScroll)
+
 })
 
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
+
 </script>

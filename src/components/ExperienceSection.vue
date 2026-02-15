@@ -1,6 +1,13 @@
 <template>
   <section id="experiencia" class="min-h-screen py-20 bg-gradient-to-br from-experience-from to-experience-to animate-gradient relative overflow-hidden">
     <!-- Background decoration -->
+    <ParticleBackground 
+      :particle-count="30"
+      shape="square"
+      particle-color="#34d399"
+      line-color="rgba(52, 211, 153, 0.2)"
+      :speed="0.8"
+    />
     <div class="absolute inset-0 opacity-10">
       <div class="absolute top-40 right-20 w-96 h-96 bg-emerald-300 rounded-full blur-3xl animate-float"></div>
       <div class="absolute bottom-20 left-20 w-80 h-80 bg-green-400 rounded-full blur-3xl animate-float" style="animation-delay: 1.5s;"></div>
@@ -41,6 +48,10 @@
             <img
               src="/images/it-career.png"
               alt="Carreira em TI"
+              loading="lazy"
+              decoding="async"
+              width="512"
+              height="384"
               class="relative rounded-2xl shadow-2xl max-w-lg w-full transform group-hover:scale-105 transition-transform duration-300 glow-effect-green"
             />
           </div>
@@ -91,6 +102,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useScrollReveal } from '../composables/useScrollReveal'
+import ParticleBackground from './ParticleBackground.vue'
 
 const positions = [
   {
@@ -98,16 +110,7 @@ const positions = [
     organization: 'Conselho Regional de Medicina',
     description: 'Gestão de infraestrutura e sistemas de TI'
   },
-  {
-    title: 'Analista em TI',
-    organization: 'Prefeitura de Esteio/RS',
-    description: 'Administração de sistemas e suporte técnico'
-  },
-  {
-    title: 'Técnico em Tecnologia',
-    organization: 'TJ/RS - Tribunal de Justiça',
-    description: 'Suporte técnico e manutenção de sistemas'
-  },
+
   {
     title: 'Técnico em Tecnologia',
     organization: 'DPE/RS - Defensoria Pública',

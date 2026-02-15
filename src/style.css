@@ -9,8 +9,9 @@
 
   body {
     @apply m-0 p-0 font-sans antialiased overflow-x-hidden;
-    cursor: none;
   }
+
+  /* Cursor customizado removido */
 }
 
 @layer utilities {
@@ -19,16 +20,21 @@
   }
 
   .glass-effect {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
+    @apply bg-white/10 backdrop-blur-sm border border-white/20;
   }
 
   .glass-effect-strong {
-    @apply bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl;
+    @apply bg-white/20 backdrop-blur-md border border-white/30 shadow-2xl;
   }
 
   .animate-gradient {
     background-size: 200% 200%;
-    animation: gradient-shift 8s ease infinite;
+    animation: gradient-shift 15s ease infinite;
+    will-change: background-position;
+  }
+
+  .animate-float {
+    will-change: transform;
   }
 
   .reveal-fade-up {
@@ -171,4 +177,22 @@
   box-shadow: 0 0 20px rgba(56, 189, 248, 0.5),
     0 0 40px rgba(56, 189, 248, 0.3),
     0 0 60px rgba(56, 189, 248, 0.1);
+}
+
+.glow-effect-amber {
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.5),
+    0 0 40px rgba(251, 191, 36, 0.3),
+    0 0 60px rgba(251, 191, 36, 0.1);
+}
+
+.glow-effect-slate {
+  box-shadow: 0 0 20px rgba(148, 163, 184, 0.5),
+    0 0 40px rgba(148, 163, 184, 0.3),
+    0 0 60px rgba(148, 163, 184, 0.1);
+}
+
+.glow-effect-cyan {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.5),
+    0 0 40px rgba(6, 182, 212, 0.3),
+    0 0 60px rgba(6, 182, 212, 0.1);
 }

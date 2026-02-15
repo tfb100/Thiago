@@ -2,9 +2,11 @@
   <section id="ia-automacao" class="min-h-screen py-20 bg-gradient-to-br from-ai-from to-ai-to animate-gradient relative overflow-hidden">
     <!-- Particle Background -->
     <ParticleBackground 
-      :particle-count="60"
-      particle-color="rgba(96, 165, 250, 0.6)"
+      :particle-count="35"
+      shape="triangle"
+      particle-color="#60a5fa"
       line-color="rgba(96, 165, 250, 0.15)"
+      :speed="1.2"
     />
 
     <!-- Background decoration -->
@@ -48,7 +50,7 @@
               <div class="flex items-start space-x-4 mb-4">
                 <div class="flex-shrink-0">
                   <div class="w-14 h-14 bg-gradient-to-br from-blue-400 to-sky-400 rounded-lg flex items-center justify-center text-3xl shadow-lg glow-effect-purple animate-pulse">
-                    {{ interest.icon }}
+                    <component :is="interest.icon" class="w-8 h-8 text-white" />
                   </div>
                 </div>
                 <div class="flex-1">
@@ -89,6 +91,10 @@
             <img
               src="/images/ai-automation.png"
               alt="IA e Automação"
+              loading="lazy"
+              decoding="async"
+              width="512"
+              height="384"
               class="relative rounded-2xl shadow-2xl max-w-lg w-full transform group-hover:scale-105 group-hover:rotate-1 transition-all duration-500 glow-effect-purple"
             />
           </div>
@@ -102,28 +108,29 @@
 import { ref, onMounted } from 'vue'
 import { useScrollReveal } from '../composables/useScrollReveal'
 import ParticleBackground from './ParticleBackground.vue'
+import { Bot, Settings, Cpu, LineChart } from 'lucide-vue-next'
 
 const interests = [
   {
-    icon: '🤖',
+    icon: Bot,
     title: 'Inteligência Artificial',
     description: 'Explorando aplicações de IA para otimizar processos e melhorar a eficiência operacional em ambientes de TI.',
     level: 90
   },
   {
-    icon: '⚙️',
+    icon: Settings,
     title: 'Automação de Processos',
     description: 'Implementando soluções de automação para reduzir tarefas repetitivas e aumentar a produtividade da equipe.',
     level: 95
   },
   {
-    icon: '🔄',
+    icon: Cpu,
     title: 'Machine Learning',
     description: 'Estudando algoritmos de aprendizado de máquina para análise preditiva e tomada de decisões inteligentes.',
     level: 85
   },
   {
-    icon: '📊',
+    icon: LineChart,
     title: 'Análise de Dados',
     description: 'Utilizando IA para extrair insights valiosos de grandes volumes de dados e apoiar decisões estratégicas.',
     level: 88

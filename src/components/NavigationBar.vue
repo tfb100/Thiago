@@ -25,8 +25,11 @@
         <!-- Mobile menu button -->
         <div class="md:hidden">
           <button
+            type="button"
+            :aria-expanded="mobileMenuOpen"
+            :aria-label="mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'"
             @click="mobileMenuOpen = !mobileMenuOpen"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
           >
             <svg
               class="h-6 w-6"
@@ -72,28 +75,18 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useScrollToSection } from '../composables/useScrollToSection'
 
 const mobileMenuOpen = ref(false)
+const { scrollToSection } = useScrollToSection()
 
 const navItems = [
   { id: 'inicio', name: 'Início' },
+  { id: 'concursos', name: 'Concursos' },
   { id: 'experiencia', name: 'Experiência' },
   { id: 'ia-automacao', name: 'IA & Automação' },
+  { id: 'dev', name: 'Dev' },
   { id: 'opensource', name: 'Open Source' },
   { id: 'contato', name: 'Contato' },
 ]
-
-const scrollToSection = (id) => {
-  const element = document.getElementById(id)
-  if (element) {
-    const offset = 80 // Account for fixed navbar height
-    const elementPosition = element.getBoundingClientRect().top
-    const offsetPosition = elementPosition + window.pageYOffset - offset
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    })
-  }
-}
 </script>
