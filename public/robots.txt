@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thiago.oqconecta.com.br/sitemap.xml
