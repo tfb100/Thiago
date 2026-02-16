@@ -141,48 +141,6 @@ onMounted(() => {
   cardsVisible.value = contactMethods.map(() => false)
   cardTransforms.value = contactMethods.map(() => ({ x: 0, y: 0, hover: false }))
 
-// 3D card effect
-const getCardStyle = (index) => {
-  const transform = cardTransforms.value[index]
-  if (!transform.hover) {
-    return {
-      transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)',
-    }
-  }
-  
-  return {
-    transform: `perspective(1000px) rotateX(${transform.x}deg) rotateY(${transform.y}deg) translateZ(30px)`,
-  }
-}
-
-const handleCardHover = (index) => {
-  cardTransforms.value[index].hover = true
-}
-
-const handleCardMove = (index, event) => {
-  const card = event.currentTarget
-  const rect = card.getBoundingClientRect()
-  const x = event.clientX - rect.left
-  const y = event.clientY - rect.top
-  
-  const centerX = rect.width / 2
-  const centerY = rect.height / 2
-  
-  const rotateX = ((y - centerY) / centerY) * -10
-  const rotateY = ((x - centerX) / centerX) * 10
-  
-  cardTransforms.value[index] = {
-    x: rotateX,
-    y: rotateY,
-    hover: true
-  }
-}
-
-const handleCardLeave = (index) => {
-  cardTransforms.value[index] = { x: 0, y: 0, hover: false }
-}
-
-onMounted(() => {
   // Observe cards
   const observer = new IntersectionObserver(
     (entries) => {
@@ -202,4 +160,51 @@ onMounted(() => {
     if (card) observer.observe(card)
   })
 })
+
+// 3D card effect
+const getCardStyle = (index) => {
+  const transform = cardTransforms.value[index]
+  if (!transform || !transform.hover) {
+    return {
+      transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)',
+    }
+  }
+  
+  return {
+    transform: `perspective(1000px) rotateX(${transform.x}deg) rotateY(${transform.y}deg) translateZ(30px)`,
+  }
+}
+
+const handleCardHover = (index) => {
+  if (cardTransforms.value[index]) {
+    cardTransforms.value[index].hover = true
+  }
+}
+
+const handleCardMove = (index, event) => {
+  if (!cardTransforms.value[index]) return
+  
+  const card = event.currentTarget
+  const rect = card.getBoundingClientRect()
+  const x = event.clientX - rect.left
+  const y = event.clientY - rect.top
+  
+  const centerX = rect.width / 2
+  const centerY = rect.height / 2
+  
+  const rotateX = ((y - centerY) / centerY) * -10
+  const rotateY = ((x - centerX) / centerX) * 10
+  
+  cardTransforms.value[index] = {
+    x: rotateX,
+    y: rotateY,
+    hover: true
+  }
+}
+
+const handleCardLeave = (index) => {
+  if (cardTransforms.value[index]) {
+    cardTransforms.value[index] = { x: 0, y: 0, hover: false }
+  }
+}
 </script>
