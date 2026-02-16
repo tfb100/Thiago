@@ -100,26 +100,32 @@
 import { ref, onMounted } from 'vue'
 import { useScrollReveal } from '../composables/useScrollReveal'
 import ParticleBackground from './ParticleBackground.vue'
-import { Mail, Briefcase, Github } from 'lucide-vue-next'
+import { Mail, Briefcase, Github, Twitter } from 'lucide-vue-next'
 
 const contactMethods = [
   {
     icon: Mail,
     title: 'Email',
     description: 'Entre em contato por email',
-    link: 'mailto:contato@thiagobarcelos.com'
+    link: 'mailto:contato@thiagobarcelos.com.br'
   },
   {
     icon: Briefcase,
     title: 'LinkedIn',
     description: 'Conecte-se profissionalmente',
-    link: 'https://linkedin.com'
+    link: 'https://www.linkedin.com/in/thiago-barcelos-42963741/'
   },
   {
     icon: Github,
     title: 'GitHub',
     description: 'Veja meus projetos',
-    link: 'https://github.com'
+    link: 'https://github.com/tfb100'
+  },
+  {
+    icon: Twitter,
+    title: 'X (Twitter)',
+    description: 'Siga-me para novidades',
+    link: 'https://x.com/_thiagobarcelos'
   }
 ]
 
@@ -128,8 +134,12 @@ const { elementRef: imageRef, isVisible: imageVisible } = useScrollReveal(0.2)
 const { elementRef: footerRef, isVisible: footerVisible } = useScrollReveal(0.2)
 
 const cardRefs = ref([])
-const cardsVisible = ref(contactMethods.map(() => false))
-const cardTransforms = ref(contactMethods.map(() => ({ x: 0, y: 0, hover: false })))
+const cardsVisible = ref([]) // Será preenchido dinamicamente
+const cardTransforms = ref([]) // Será preenchido dinamicamente
+
+onMounted(() => {
+  cardsVisible.value = contactMethods.map(() => false)
+  cardTransforms.value = contactMethods.map(() => ({ x: 0, y: 0, hover: false }))
 
 // 3D card effect
 const getCardStyle = (index) => {
